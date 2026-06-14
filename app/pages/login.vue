@@ -24,7 +24,7 @@
 
                 <form @submit.prevent="handleLogin" class="space-y-4">
                     <div class="space-y-1.5">
-                        <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Email 
+                        <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">NIM/Email
                         </label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-4 flex items-center text-slate-400">
@@ -34,7 +34,7 @@
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </span>
-                            <input v-model="loginForm.email" type="text" required placeholder="Masukkan email"
+                            <input v-model="loginForm.nimOrEmail" type="text" required placeholder="Masukkan nim/email"
                                 class="w-full pl-11 pr-4 py-3 bg-[#F5F7FA] border border-transparent rounded-2xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-indigo-500/30 focus:ring-4 focus:ring-indigo-500/5 transition-all duration-300" />
                         </div>
                     </div>
@@ -229,7 +229,7 @@ const loginForm = reactive({
 
 const handleLogin = async () => {
 
-    if(!loginForm.email || !loginForm.password){
+    if(!loginForm.nimOrEmail || !loginForm.password){
         showToast('Email dan password wajib disini!','error');
         return;
     }
@@ -238,26 +238,28 @@ const handleLogin = async () => {
     
     try{
         
-        const response = await $fetch('/api/auth/login' ,{
+        const response = await $fetch('/api/auth/loginapi' ,{
             method: 'POST',
             body : {
-                email : loginForm.email,
+                nimOrEmail : loginForm.nimOrEmail,
                 password : loginForm.password
             }
         });
         
 
 
-        if(response.success){
+        if(response.status === 200){
 
-            setSession(response.user);
+            setSession(response.data);
             showToast('Login berhasil!', 'success');
            
             setTimeout(async () => {
 
                 await navigateTo('/' , {replace : true});
 
-            }, 1200);
+            }, 1200);            
+
+
 
         }
 

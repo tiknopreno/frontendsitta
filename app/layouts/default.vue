@@ -62,10 +62,10 @@ const globalSearch = useState('global-search-keyword', () => '');
                     <div
                         class="flex items-center gap-3 border-l pl-6 border-slate-100 group relative cursor-pointer py-2">
                         <div class="text-right">
-                            <p class="text-xs font-bold text-slate-900">{{ user?.nama || 'Pengguna' }}</p>
+                            <p class="text-xs font-bold text-slate-900">{{ user?.fullName || 'Pengguna' }}</p>
                             <p
                                 class="text-[10px] text-indigo-600 font-semibold bg-indigo-50 px-1.5 py-0.5 rounded mt-0.5 inline-block">
-                                {{ user?.role || 'Member' }}
+                                {{ user?.userdetail?.role_user || 'Member' }}
                             </p>
                         </div>
                         <div

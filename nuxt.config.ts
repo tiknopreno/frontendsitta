@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   runtimeConfig:{
-    baseUrl : process.env['BASE_URL']
+    baseUrl : process.env['BASE_URL'],
+    backendApi : process.env['BACKEND_API']
   }
 })
